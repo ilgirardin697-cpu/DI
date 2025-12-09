@@ -1,0 +1,51 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class Main {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            crearGUI();
+        });
+    }
+
+    private static void crearGUI() {
+        // Crear ventana
+        JFrame frame = new JFrame("Mi Primera GUI");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Panel principal con margen
+        JPanel panel = new JPanel(new BorderLayout(10,10));
+        panel.setBorder(BorderFactory.createEmptyBorder(15,15,15,15));
+
+        // Título centrado y con fuente más grande
+        JLabel titulo = new JLabel("Primera GUI", SwingConstants.CENTER);
+        titulo.setFont(new Font("Arial", Font.BOLD, 18));
+        panel.add(titulo, BorderLayout.NORTH);
+
+        // Panel central con campo de texto
+        JPanel centro = new JPanel(new FlowLayout());
+        JTextField campo = new JTextField(15);
+        centro.add(campo);
+        panel.add(centro, BorderLayout.CENTER);
+
+        // Botón abajo
+        JButton boton = new JButton("DALE DURO");
+        panel.add(boton, BorderLayout.SOUTH);
+
+        // Acción del botón
+        boton.addActionListener(e -> {
+            String nombre = campo.getText();
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "Campo vacío");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Primera GUI: " + nombre);
+            }
+        });
+
+        // Añadir panel y mostrar ventana
+        frame.add(panel);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+}
